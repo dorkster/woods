@@ -51,7 +51,7 @@ void playerLogic() {
         player.y += 2;
     }
 
-    player.angle += sin(player.angle * M_PI / 180.0)*1.5;
+    player.angle += sin(player.angle * M_PI / 180.0)*3;
 
     if (player.angle > 80.0 || player.angle < -80.0) {
         trigger_game_over = true;
@@ -67,11 +67,13 @@ void playerLogic() {
 void playerMove() {
     if (action_cooldown > 0) return;
 
+    int speed = abs(sin(player.angle * M_PI / 180.0)*16) + 2;
+
     if (action_left) {
-        player.angle += 8;
+        player.angle += speed;
         // shift weight left
     } else if (action_right) {
-        player.angle -= 8;
+        player.angle -= speed;
         // shift weight right
     } else return;
 
