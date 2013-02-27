@@ -1,0 +1,40 @@
+# Woods
+-------------------------------------------------------------------------------
+
+Woods is a very simple game about a moment of my childhood that involved crossing a stream. The goal is to keep your balance on the log until you reach the other side.
+
+
+
+## Copyright & License
+
+Woods is Copyright (c) 2013 Justin Jacobs
+
+Woods' source code is released under the GNU GPL v3. Later versions are permitted.
+
+The included Alegreya font is licensed under the SIL Open Font License, Version 1.1.
+
+res/graphics/background.png contains LPC assets (please see lpc_attribution.txt for full details).
+
+res/graphics/player.png is by sheep and licensed under CC-BY-SA 3.0 and GPL 3.0.
+
+All other artwork is by me, Justin Jacobs, and is licensed under CC-BY-SA 3.0.
+
+
+
+## Dependencies & Building
+
+* SDL
+* SDL_ttf
+* SDL_image
+* SDL_mixer
+
+To compile Woods, simply run `make` in the base directory.
+
+
+
+## Controls
+
+* Arrow keys / Joystick D-pad = Move cursor (all directions) / Adjust balance (left and right)
+* Z / Joystick Button 0 = Confirm menu selection
+* ESC / Joystick Button 9 = Pause the game
+

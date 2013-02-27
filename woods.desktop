@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+
+Type=Application
+
+Name=Woods
+Comment=A game about crossing a stream
+Icon=
+
+Categories=SDL;Game;
+
+Exec=woods
+Terminal=false
+StartupNotify=false
