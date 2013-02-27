@@ -44,9 +44,9 @@ typedef enum { false = 0, true = 1 } bool;
 SDL_Surface* screen;
 TTF_Font* font;
 
-int lives;
 bool title_screen;
 int options_screen;
+bool victory;
 bool game_over;
 bool trigger_game_over;
 bool paused;
@@ -88,6 +88,7 @@ SDL_Surface* surface_bar;
 SDL_Surface* surface_bar_inactive;
 SDL_Surface* surface_background;
 SDL_Surface* surface_title;
+SDL_Surface* surface_player;
 
 // Music and Sounds
 Mix_Music* music;

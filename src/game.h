@@ -23,7 +23,6 @@ void gameTitle();
 void gameOptions();
 void gameInit();
 void gameLogic();
-void gameMove();
 void gameOver();
 void gamePause();
 

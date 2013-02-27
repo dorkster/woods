@@ -24,5 +24,6 @@ void drawMenu(int offset);
 void drawInfo();
 void drawTitle();
 void drawOptions();
+void drawPlayer();
 
 #endif

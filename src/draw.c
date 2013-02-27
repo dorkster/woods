@@ -20,6 +20,7 @@
 
 #include "draw.h"
 #include "menu.h"
+#include "player.h"
 #include "sys.h"
 
 void drawEverything() {
@@ -34,6 +35,7 @@ void drawEverything() {
         drawOptions();
     } else {
         drawInfo();
+        drawPlayer();
     }
 }
 
@@ -60,8 +62,10 @@ void drawMenu(int offset) {
 }
 
 void drawInfo() {
+    if (!game_over && !paused && !victory) return;
+
     SDL_Surface *text_info;
-    char text[256];
+    char text[256] = "";
     SDL_Color color = {217,217,217};
     SDL_Rect dest;
 
@@ -73,10 +77,8 @@ void drawInfo() {
 
     // statusbar text
     if (game_over) sprintf(text,"Game Over!");
-    else {
-        if (paused) sprintf(text,"Lives: %d  *Paused*",lives);
-        else sprintf(text,"Lives: %d",lives);
-    }
+    else if (paused) sprintf(text,"*Paused*");
+    else if (victory) sprintf(text,"You made it across!");
 
     text_info = TTF_RenderText_Blended(font,text,color);
     if(text_info) {
@@ -88,7 +90,7 @@ void drawInfo() {
     }
 
     // menu
-    if (paused || game_over) drawMenu(surface_bar->h);
+    if (paused || game_over || victory) drawMenu(surface_bar->h);
 }
 
 void drawTitle() {
@@ -106,5 +108,20 @@ void drawTitle() {
 void drawOptions() {
     // menu
     drawMenu(0);
+}
+
+void drawPlayer() {
+    if (game_over) return;
+
+    SDL_Rect dest,src;
+
+    dest.x = player.x;
+    dest.y = player.y;
+
+    src.x = 0;
+    src.y = 48 * player.frame;
+    src.w = src.h = 48;
+
+    SDL_BlitSurface(surface_player,&src,screen,&dest);
 }
 

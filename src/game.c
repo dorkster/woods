@@ -20,6 +20,7 @@
 
 #include "game.h"
 #include "menu.h"
+#include "player.h"
 #include "sys.h"
 
 void gameTitle() {
@@ -27,7 +28,6 @@ void gameTitle() {
     options_screen = -1;
 
     game_over = false;
-    lives = 0;
     Mix_FadeOutMusic(2000);
 
     menuAdd("Play Game");
@@ -51,12 +51,14 @@ void gameOptions() {
 
 void gameInit() {
     title_screen = false;
-    lives = 3;
 
     Mix_VolumeMusic(option_music*16);
     if (!game_over) Mix_PlayMusic(music,-1);
 
     game_over = false;
+    victory = false;
+
+    playerInit();
 }
 
 void gameLogic() {
@@ -162,7 +164,7 @@ void gameLogic() {
     }
 
     // handle game over menu
-    if (game_over) {
+    if ((game_over || victory) && !trigger_game_over) {
         menu_choice = menuLogic();
         if (menu_choice > -1) {
             menuClear();
@@ -194,26 +196,15 @@ void gameLogic() {
                 }
             }
         } else {
-            gameMove();
+            playerMove();
+            playerLogic();
         }
     }
 }
 
-void gameMove() {
-    if (action_cooldown > 0) return;
-
-    if (action_left) {
-        // shift weight left
-    } else if (action_right) {
-        // shift weight right
-    } else return;
-
-    action_cooldown = ACTION_COOLDOWN;
-}
-
 void gameOver() {
     trigger_game_over = false;
-    game_over = true;
+    if (!victory) game_over = true;
 
     menuAdd("Try again");
     menuAdd("Return to title screen");
