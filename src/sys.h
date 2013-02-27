@@ -23,6 +23,10 @@
 #include "SDL/SDL_ttf.h"
 #include "SDL/SDL_mixer.h"
 
+#ifndef M_PI
+#define M_PI	3.141592654
+#endif
+
 typedef enum { false = 0, true = 1 } bool;
 
 #define SCREEN_WIDTH 640
@@ -82,6 +86,7 @@ void sysConfigSetFolder();
 void sysConfigLoad();
 void sysConfigSave();
 void sysConfigApply();
+SDL_Surface* sysCreateSurface(int width, int height);
 
 // Images
 SDL_Surface* surface_bar;

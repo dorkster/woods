@@ -16,12 +16,15 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <stdlib.h>
+
 #include "SDL/SDL_ttf.h"
+#include "math.h"
 
 #include "player.h"
 #include "sys.h"
 
-const int WALK_DELAY = 4;
+const int WALK_DELAY = 16;
 const int FRAME_TIME = 4;
 
 Player player;
@@ -36,12 +39,6 @@ void playerInit() {
 }
 
 void playerLogic() {
-    if (player.y >= 288) {
-        trigger_game_over = true;
-        victory = true;
-        return;
-    }
-
     if (player.frame_ticks > 0) player.frame_ticks--;
     if (player.frame_ticks == 0) {
         player.frame_ticks = FRAME_TIME;
@@ -53,14 +50,28 @@ void playerLogic() {
         player.walk_delay = WALK_DELAY;
         player.y += 2;
     }
+
+    player.angle += sin(player.angle * M_PI / 180.0)*1.5;
+
+    if (player.angle > 80.0 || player.angle < -80.0) {
+        trigger_game_over = true;
+        return;
+    }
+
+    if (player.y >= 288) {
+        trigger_game_over = true;
+        victory = true;
+    }
 }
 
 void playerMove() {
     if (action_cooldown > 0) return;
 
     if (action_left) {
+        player.angle += 8;
         // shift weight left
     } else if (action_right) {
+        player.angle -= 8;
         // shift weight right
     } else return;
 

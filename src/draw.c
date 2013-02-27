@@ -18,6 +18,8 @@
 
 #include "SDL/SDL_ttf.h"
 
+#include "SDL_rotozoom.h"
+
 #include "draw.h"
 #include "menu.h"
 #include "player.h"
@@ -113,15 +115,28 @@ void drawOptions() {
 void drawPlayer() {
     if (game_over) return;
 
+    SDL_Surface *rot = sysCreateSurface(48,48);
+    if (!rot) return;
+
     SDL_Rect dest,src;
 
-    dest.x = player.x;
-    dest.y = player.y;
+    dest.x = 0;
+    dest.y = 0;
 
     src.x = 0;
     src.y = 48 * player.frame;
     src.w = src.h = 48;
 
-    SDL_BlitSurface(surface_player,&src,screen,&dest);
+    SDL_BlitSurface(surface_player,&src,rot,&dest);
+
+    rot = rotozoomSurface(rot,player.angle,1,0);
+    if (!rot) return;
+
+    dest.x = player.x + ((48-rot->w)/2) - (int)((sin(player.angle * M_PI / 180.0)*48)/2);
+    dest.y = player.y + ((48-rot->h)/2);
+
+    SDL_BlitSurface(rot,NULL,screen,&dest);
+
+    SDL_FreeSurface(rot);
 }
 

@@ -6,7 +6,7 @@ OBJECTS=$(patsubst $(SRCDIR)%.c,$(BUILDDIR)%.o, $(SOURCES))
 
 CC=gcc
 CFLAGS+=-Wall -O2 -mms-bitfields -std=c99
-LDFLAGS+=-lSDL -lSDL_ttf -lSDL_image -lSDL_mixer
+LDFLAGS+=-lSDL -lSDL_ttf -lSDL_image -lSDL_mixer -lm
 
 PREFIX=/usr/local
 BINDIR=$(PREFIX)/bin
