@@ -57,11 +57,11 @@ int menuLogic() {
         } else if (action_up && action_cooldown == 0 && menu_option > 0) {
             menu_option--;
             action_cooldown = ACTION_COOLDOWN;
-            Mix_PlayChannel(-1,sound_switch,0);
+            Mix_PlayChannel(-1,sound_menu,0);
         } else if (action_down && action_cooldown == 0 && menu_option < menu_size-1) {
             menu_option++;
             action_cooldown = ACTION_COOLDOWN;
-            Mix_PlayChannel(-1,sound_switch,0);
+            Mix_PlayChannel(-1,sound_menu,0);
         }
     }
     return -1;

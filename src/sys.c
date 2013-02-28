@@ -39,7 +39,6 @@ SDL_Surface* surface_title = NULL;
 SDL_Surface* surface_player = NULL;
 Mix_Music* music = NULL;
 Mix_Chunk* sound_menu = NULL;
-Mix_Chunk* sound_switch = NULL;
 SDL_Joystick* joy = NULL;
 
 bool title_screen = true;
@@ -135,11 +134,8 @@ bool sysLoadFiles() {
     if (!music) return false;
 
     // sound effects
-    sound_menu = Mix_LoadWAV(PKGDATADIR "/sounds/menu.wav");
+    sound_menu = Mix_LoadWAV(PKGDATADIR "/sounds/menu.ogg");
     if (!sound_menu) return false;
-
-    sound_switch = Mix_LoadWAV(PKGDATADIR "/sounds/switch.wav");
-    if (!sound_switch) return false;
 
     return true;
 }
@@ -157,7 +153,6 @@ void sysCleanup() {
     SDL_FreeSurface(surface_player);
     Mix_FreeMusic(music);
     Mix_FreeChunk(sound_menu);
-    Mix_FreeChunk(sound_switch);
     SDL_Quit();
 }
 
