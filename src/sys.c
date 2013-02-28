@@ -131,8 +131,8 @@ bool sysLoadFiles() {
     }
 
     // background music
-    // music = Mix_LoadMUS(PKGDATADIR "/sounds/music.ogg");
-    // if (!music) return false;
+    music = Mix_LoadMUS(PKGDATADIR "/sounds/music.ogg");
+    if (!music) return false;
 
     // sound effects
     sound_menu = Mix_LoadWAV(PKGDATADIR "/sounds/menu.wav");
